@@ -16,31 +16,40 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
   })
 
   return (
-    <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white"
-      data-theme="dark"
-    >
-      <div className="container mb-8 z-10 relative flex items-center justify-center">
-        <div className="max-w-[36.5rem] md:text-center">
-          {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
-          {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex md:justify-center gap-4">
-              {links.map(({ link }, i) => {
-                return (
-                  <li key={i}>
-                    <CMSLink {...link} />
-                  </li>
-                )
-              })}
-            </ul>
+    <>
+      <div
+        className="relative -mt-[8rem] flex items-center justify-center text-white xl:mx-20"
+        data-theme="dark"
+      >
+        <div className="container mb-8 z-10 relative">
+          <div className="grid grid-cols-4 xl:grid-cols-12">
+            <div className="col-span-4 xl:col-span-4">
+              {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
+              {Array.isArray(links) && links.length > 0 && (
+                <ul className="flex gap-4">
+                  {links.map(({ link }, i) => {
+                    return (
+                      <li key={i}>
+                        <CMSLink {...link} />
+                      </li>
+                    )
+                  })}
+                </ul>
+              )}
+            </div>
+            <div className="col-span-4 xl:col-span-6 xl:col-start-8">
+              <div className="bg-white/20 shadow-lg ring-1 ring-black/5 rounded-2xl backdrop-blur p-16 min-h-[600px]">
+                <h1>Upcoming Event!</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="min-h-[80vh] select-none">
+          {media && typeof media === 'object' && (
+            <Media fill imgClassName="-z-10 object-cover rounded-2xl" priority resource={media} />
           )}
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
-        {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
-        )}
-      </div>
-    </div>
+    </>
   )
 }
